@@ -1,5 +1,12 @@
-import pefile
+#!/usr/local/bin/python2
+# -*- coding: utf8 -*-
 
+import pefile
+import os
+from json_parse import *
+
+STEP_FLAG = 20
+STEP_FILES = 50
 NOS = 'NumberOfSections'
 
 
@@ -39,10 +46,42 @@ def parse_file(file_path):
     return result
 
 
+def parse_dir(dir_path):
+    result = []
+    for d, dirs, files in os.walk(dir_path):
+        for f in files:
+            result.append(str(d + f))
+    return result
+
+
+def steps(index, result):
+    if index % STEP_FLAG == 0:
+        print index
+    if index % STEP_FILES == 0:
+        write_file('base/exe_files_{}.json'.format(index), result)
+        return []
+    else:
+        return result
+
 if __name__ == '__main__':
     file_path = 'ChromeSetup.exe'
     file_path = 'd3dx9_43.dll'
-    res_lst = parse_file(file_path)
-    print len(res_lst)
-    print res_lst
+    file_path = 'for_file/BRPTUNI2.DLL'
+
+    # res_lst = parse_file(file_path)
+    # print len(res_lst)
+    # print res_lst
+
+    base = parse_dir('/home/hodzi/diplom/exe/')
+    index = 0
+    result = []
+    for file_base in base:
+        try:
+            print file_base
+            result.append(parse_file(file_base))
+            index += 1
+            result = steps(index, result)
+        except:
+            print 'ERROR', file_base
+
 

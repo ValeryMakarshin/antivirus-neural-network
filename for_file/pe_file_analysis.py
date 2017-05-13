@@ -38,8 +38,8 @@ def main(file_path):
 
 
 if __name__ == '__main__':
-    file_path = 'ChromeSetup.exe'
-    file_path = 'd3dx9_43.dll'
+    file_path = 'for_file/ChromeSetup.exe'
+    file_path = 'for_file/chkntfs.exe.mui'
     # main(file_path)
     pe = pefile.PE(file_path)
     print(pe.FILE_HEADER.dump_dict())
