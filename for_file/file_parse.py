@@ -6,7 +6,7 @@ import os
 from json_parse import *
 
 STEP_FLAG = 20
-STEP_FILES = 50
+STEP_FILES = 200
 NOS = 'NumberOfSections'
 
 
@@ -72,7 +72,7 @@ if __name__ == '__main__':
     # print len(res_lst)
     # print res_lst
 
-    base = parse_dir('/home/hodzi/diplom/exe/')
+    base = parse_dir('/home/hodzi/diplom/dll/')
     index = 0
     result = []
     for file_base in base:
