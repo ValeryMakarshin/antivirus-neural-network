@@ -1,14 +1,14 @@
 import json
 
-GOOD_FILE = 'base/dll_500.json'
-BAD_FILE = 'base/dll_500.json'
+GOOD_FILE = 'base/dll_3529.json'
+BAD_FILE = 'base/exe_839.json'
 
 
 def get_all_data():
-    # good_data = parse_file(GOOD_FILE)[:250]
+    # good_data = parse_file(GOOD_FILE)
     good_data = parse_file(GOOD_FILE)[:250]
-    bad_data = parse_file(GOOD_FILE)[250:]
     # bad_data = parse_file(BAD_FILE)
+    bad_data = parse_file(BAD_FILE)[:250]
     return good_data, bad_data
 
 
@@ -26,12 +26,12 @@ def write_file(file_name, data):
 
 
 if __name__ == '__main__':
-    d = parse_file('base/dll_4368.json')
+    d = parse_file('dll_4368.json')
 
-    result = list(i for i in d if len(i) == 224)[:500]
+    result = list(i for i in d if len(i) == 224)
 
     print len(result)
-    print result
+    # print result
 
-    write_file('base/dll_500.json', result)
+    write_file('dll_3529.json', result)
     pass

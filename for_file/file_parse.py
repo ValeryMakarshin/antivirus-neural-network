@@ -29,21 +29,22 @@ def parse_dict(dict_for_parse):
     #     print dict_for_parse[i][j]
 
 
+# функция для вытаскивания атрибутов
 def parse_file(file_path):
-    result = list()
+    result_atr = list()
     pe = pefile.PE(file_path)
-    result += parse_dict(pe.FILE_HEADER.dump_dict())
-    result += parse_dict(pe.DOS_HEADER.dump_dict())
-    result += parse_dict(pe.OPTIONAL_HEADER.dump_dict())
-    result.append(pe.PE_TYPE)
-    result.append(pe.fileno)
-    result.append(int(pe.is_exe()))
-    result.append(int(pe.is_dll()))
-    result.append(int(pe.is_driver()))
-    result += parse_dict(pe.NT_HEADERS.dump_dict())
-    result += parse_dict(pe.VS_FIXEDFILEINFO.dump_dict())
-    result += parse_dict(pe.VS_VERSIONINFO.dump_dict())
-    return result
+    result_atr += parse_dict(pe.FILE_HEADER.dump_dict())
+    result_atr += parse_dict(pe.DOS_HEADER.dump_dict())
+    result_atr += parse_dict(pe.OPTIONAL_HEADER.dump_dict())
+    result_atr.append(pe.PE_TYPE)
+    result_atr.append(pe.fileno)
+    result_atr.append(int(pe.is_exe()))
+    result_atr.append(int(pe.is_dll()))
+    result_atr.append(int(pe.is_driver()))
+    result_atr += parse_dict(pe.NT_HEADERS.dump_dict())
+    result_atr += parse_dict(pe.VS_FIXEDFILEINFO.dump_dict())
+    result_atr += parse_dict(pe.VS_VERSIONINFO.dump_dict())
+    return result_atr
 
 
 def parse_dir(dir_path):

@@ -1,12 +1,9 @@
-from pybrain.datasets import SupervisedDataSet
 from pybrain.tools.shortcuts import buildNetwork
 from pybrain.supervised.trainers import BackpropTrainer
 from file_parse import get_all_data
 from train_data import get_supervised_data_set
 
-GOOD_FILE = 'base/dll_500.json'
-BAD_FILE = 'base/dll_500.json'
-STEP = 5
+STEP = 10
 
 
 # def get_supervised_data_set(data):
@@ -16,13 +13,22 @@ STEP = 5
 #     return ds
 
 
-def hidden0_test(good_data, bad_file):
-    net = buildNetwork(len(good_data[0]), 5, 1)
+def hidden0_tst(good_data, n, bad_file):
+    net = buildNetwork(len(good_data[0]), n, 2)
     trainer = BackpropTrainer(net, get_supervised_data_set(good_data, bad_file))
     # trainer.trainUntilConvergence()
     return trainer
 
 
+def train_for_step(good_data, bad_data):
+    for i in range(5, 226, STEP):
+        trainer = hidden0_tst(good_data, i, bad_data)
+        for j in range(20):
+            trainer.train()
+        print "{:03d}".format(i), trainer.train()
+
+
 if __name__ == '__main__':
-    trainer = hidden0_test(get_all_data())
-    print trainer
+    good_data, bad_data = get_all_data()
+    train_for_step(good_data, bad_data)
+    # print trainer
